@@ -86,7 +86,7 @@
             </div>
           </q-item-section>
           <q-item-section side top>
-            {{ qweet.date}}
+            {{ formatDate(qweet.date)}}
 
           </q-item-section>
 
@@ -101,6 +101,7 @@
 <script>
 import db from 'src/boot/firebase'
 import { formatDistance } from 'date-fns'
+import moment from "moment";
 
 export default {
   name: 'PageHome',
@@ -123,6 +124,11 @@ export default {
 
 
   methods:{
+    formatDate(value) {
+      return moment(value).format("MMM DD, YYYY") + ' at ' +
+        moment(value).format("hh:mma")
+    },
+
     addNewQweet() {
       let newQweet = {
         content: this.newQweetContent,
